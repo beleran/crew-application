@@ -1,0 +1,35 @@
+.ca-card {
+    padding: 20px 0;
+    position: relative;
+    min-height: 100px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+
+    &__info-wrapper {
+        display: flex;
+        padding: 0 20px;
+        align-items: center;
+
+        .ca_card__info-wrapper__avatar {
+            margin-right: 20px;
+        }
+    }
+
+    .ca_card__change-status {
+        width: 20px;
+        height: 20px;
+        background: #000;
+        position: absolute;
+        bottom: 20px;
+        cursor: pointer;
+
+        &.prev-status {
+            left: 20px;
+        }
+
+        &.next-status {
+            right: 20px;
+        }
+    }
+}

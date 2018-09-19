@@ -1,0 +1,14 @@
+.ca-cards-table {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    &__column {
+        min-width: 300px;
+
+        &__title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+    }
+}

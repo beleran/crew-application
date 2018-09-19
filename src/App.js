@@ -6,8 +6,11 @@ import Loading from './components/Loading';
 import { fetchCrew, setStatus } from "./actions/Crew";
 
 class App extends Component {
-    componentWillMount() {
-        this.props.fetchCrew();
+    componentDidMount() {
+        const { crew } = this.props;
+        if (!crew || !crew.length) {
+            this.props.fetchCrew();
+        }
     }
     render() {
         const { crew } = this.props;

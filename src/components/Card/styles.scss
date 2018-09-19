@@ -19,17 +19,32 @@
     .ca_card__change-status {
         width: 20px;
         height: 20px;
-        background: #000;
         position: absolute;
         bottom: 20px;
         cursor: pointer;
 
         &.prev-status {
             left: 20px;
+            > .icon {
+                width: 0;
+                height: 0;
+                border-top: 8px solid transparent;
+                border-bottom: 8px solid transparent;
+
+                border-right: 10px solid #000;
+            }
         }
 
         &.next-status {
             right: 20px;
+            > .icon {
+                width: 0;
+                height: 0;
+                border-top: 8px solid transparent;
+                border-bottom: 8px solid transparent;
+
+                border-left: 10px solid #000;
+            }
         }
     }
 }

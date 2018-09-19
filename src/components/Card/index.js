@@ -27,13 +27,13 @@ class Card extends Component {
                     <div
                         className="ca_card__change-status prev-status"
                         onClick={() => onStatusChange(person, -1)}
-                    >&nbsp;</div>
+                    ><div className="icon">&nbsp;</div></div>
                 ) : null }
                 { this.hasNextStatus() ? (
                     <div
                         className="ca_card__change-status next-status"
                         onClick={() => onStatusChange(person, 1)}
-                    >&nbsp;</div>) : null }
+                    ><div className="icon">&nbsp;</div></div>) : null }
             </div>
         );
     }
@@ -47,14 +47,5 @@ Card.propTypes = {
 Card.defaultProps = {
     person: {},
 };
-
-/*.shape({
-    gender: PropTypes.string,
-    name: PropTypes.shape({
-        title: PropTypes.string,
-        first: PropTypes.string,
-        last: PropTypes.string,
-    })
-})*/
 
 export default Card;

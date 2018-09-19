@@ -1,49 +1,31 @@
 import React, {Component} from 'react';
+import { connect } from 'react-redux';
 import './App.scss';
 import CardsTable from './components/CardsTable';
 import Loading from './components/Loading';
-
-import { APPLIED, STATUSES } from "./common/constants";
+import { fetchCrew, setStatus } from "./actions/Crew";
 
 class App extends Component {
-    constructor() {
-        super();
-
-        this.state = {
-            crew: [],
-        };
-
-        this.setStatus = this.setStatus.bind(this);
-    }
-
-    setStatus(person, direction) {
-        const crew = [...this.state.crew];
-        const index = crew.indexOf(person);
-        const status = STATUSES[STATUSES.indexOf(person.status) + direction];
-
-        if (index !== -1 && status) {
-            crew.splice(index, 1, Object.assign(crew[index], { status }));
-            this.setState({ crew });
-        }
-    }
-
     componentWillMount() {
-        fetch('https://randomuser.me/api/?nat=gb&results=5').then((resource) => {
-            return resource.json();
-        }).then((response) => {
-            this.setState({
-                crew: response.results.map(person => Object.assign({}, person, { status: APPLIED })),
-            })
-        });
+        this.props.fetchCrew();
     }
     render() {
-        const { crew } = this.state;
+        const { crew } = this.props;
         return (
             <div className="App">
-                { crew && crew.length ? <CardsTable crew={crew} onStatusChange={this.setStatus} /> : <Loading /> }
+                { crew && crew.length ? <CardsTable crew={crew} onStatusChange={this.props.setStatus} /> : <Loading /> }
             </div>
         );
     }
 }
 
-export default App;
+const mapStateToProps = state => ({
+    crew: state.CrewState.crew,
+});
+
+const mapDispatchToProps = dispatch => ({
+    fetchCrew: () => dispatch(fetchCrew()),
+    setStatus: (person, direction) => dispatch(setStatus(person, direction)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

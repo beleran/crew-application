@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import './App.scss';
 import CardsTable from './components/CardsTable';
+import Filters from './components/Filters';
 import Loading from './components/Loading';
 import { fetchCrew, setStatus } from "./actions/Crew";
 
@@ -13,10 +14,11 @@ class App extends Component {
         }
     }
     render() {
-        const { crew } = this.props;
+        const { crew, filteredCrew } = this.props;
         return (
             <div className="App">
-                { crew && crew.length ? <CardsTable crew={crew} onStatusChange={this.props.setStatus} /> : <Loading /> }
+                <Filters />
+                { crew && crew.length ? <CardsTable crew={filteredCrew} onStatusChange={this.props.setStatus} /> : <Loading /> }
             </div>
         );
     }
@@ -24,6 +26,7 @@ class App extends Component {
 
 const mapStateToProps = state => ({
     crew: state.CrewState.crew,
+    filteredCrew: state.CrewState.filteredCrew,
 });
 
 const mapDispatchToProps = dispatch => ({

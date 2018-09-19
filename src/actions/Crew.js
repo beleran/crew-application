@@ -2,6 +2,7 @@ import { APPLIED } from "../common/constants";
 
 export const FETCH_CREW = 'FETCH_CREW';
 export const SET_STATUS = 'SET_STATUS';
+export const SET_FILTERS = 'SET_FILTERS';
 
 export function fetchCrew() {
     return (dispatch) => {
@@ -16,5 +17,11 @@ export function fetchCrew() {
 export function setStatus(person, direction) {
     return (dispatch) => {
         dispatch({ type: SET_STATUS, person, direction })
+    }
+}
+
+export function setFilters(filters) {
+    return (dispatch) => {
+        dispatch({ type: SET_FILTERS, filters })
     }
 }

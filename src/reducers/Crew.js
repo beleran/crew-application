@@ -1,7 +1,8 @@
-import { FETCH_CREW, SET_STATUS } from "../actions/Crew";
+import { FETCH_CREW, SET_STATUS, SET_FILTERS } from "../actions/Crew";
 import { STATUSES } from "../common/constants";
 
-const initialState = JSON.parse(localStorage.getItem('savedState') || '{"crew":[]}');
+const localStorageValue = localStorage.getItem('savedState');
+const initialState = localStorageValue ? JSON.parse(localStorageValue) : { crew: [], filteredCrew: [], filters: {  name: '', city: '' } };
 
 const CrewState = (state, action) => {
     if (typeof state === 'undefined') {
@@ -10,8 +11,10 @@ const CrewState = (state, action) => {
 
     switch (action.type) {
         case FETCH_CREW: {
-            const newState = Object.assign({}, state);
-            newState.crew = action.crew;
+            const newState = Object.assign({}, state, {
+                crew: action.crew,
+                filteredCrew: action.crew,
+            });
             localStorage.setItem('savedState', JSON.stringify(newState));
             return newState;
         }
@@ -25,6 +28,21 @@ const CrewState = (state, action) => {
                 crew.splice(index, 1, Object.assign(crew[index], {status}));
             }
             const newState = Object.assign({}, state, {crew});
+            localStorage.setItem('savedState', JSON.stringify(newState));
+            return newState;
+        }
+
+        case SET_FILTERS: {
+            const filteredCrew = state.crew.filter((person) => {
+                if (action.filters.name) {
+                    return `${person.name.first} ${person.name.last}`.search(action.filters.name) !== -1;
+                }
+                if (action.filters.city) {
+                    return person.city.search(action.filters.city) !== -1;
+                }
+                return true;
+            });
+            const newState = Object.assign({}, state, { filteredCrew, filters: action.filters});
             localStorage.setItem('savedState', JSON.stringify(newState));
             return newState;
         }

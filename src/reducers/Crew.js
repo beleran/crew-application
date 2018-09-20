@@ -4,7 +4,7 @@ import { STATUSES } from '../common/constants';
 const localStorageValue = localStorage.getItem('savedState');
 const initialState = localStorageValue ? JSON.parse(localStorageValue) : { crew: [], filteredCrew: [], filters: {  name: '', city: '' } };
 
-if (initialState.filteredCrew.length) {
+if (!initialState.filteredCrew || initialState.filteredCrew.length) {
     initialState.filteredCrew = filterPersons(initialState.crew, initialState.filters);
 }
 

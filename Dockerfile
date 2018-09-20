@@ -8,11 +8,9 @@ RUN apt-get update -y
 RUN apt-get install yarn -y
 
 WORKDIR /tmp
-COPY config ./config
 COPY public ./public
-COPY scripts ./scripts
 COPY src ./src
-COPY package.json yarn.lock ./
+COPY package.json yarn.lock webpack.config.js ./
 RUN yarn install
 RUN yarn build
 RUN yarn global add serve

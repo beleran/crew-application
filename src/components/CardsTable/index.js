@@ -1,42 +1,30 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-
 import Card from '../Card';
-
 import { STATUSES } from "../../common/constants";
 
-import './styles.scss';
+import { Table, Column, Title, Content } from './styled';
 
-class CardsTable extends Component {
-    renderColumn(status) {
+class CardsTable extends Component<{ crew: Person[], onStatusChange: Function }> {
+    renderColumn(status: string) {
         const { crew, onStatusChange } = this.props;
         return (
-            <div className="ca-cards-table__column" key={status}>
-                <div className="ca-cards-table__column__title">{status}</div>
-                <div className="ca-cards-table__column__cards-wrapper">
+            <Column key={status}>
+                <Title>{status}</Title>
+                <Content>
                     { crew.filter(person => person.status === status).map(person => (
                         <Card person={person} onStatusChange={onStatusChange} key={person.login.uuid} />
                     )) }
-                </div>
-            </div>
+                </Content>
+            </Column>
         )
     }
     render() {
         return (
-            <div className="ca-cards-table">
+            <Table>
                 { STATUSES.map(status => this.renderColumn(status))}
-            </div>
+            </Table>
         );
     }
 }
-
-CardsTable.propTypes = {
-    crew: PropTypes.array,
-    onStatusChange: PropTypes.func.isRequired,
-};
-
-CardsTable.defaultProps = {
-    crew: [],
-};
 
 export default CardsTable;

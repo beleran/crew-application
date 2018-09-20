@@ -1,10 +1,26 @@
-import { FETCH_CREW, SET_STATUS, SET_FILTERS } from "../actions/Crew";
-import { STATUSES } from "../common/constants";
+import { FETCH_CREW, SET_STATUS, SET_FILTERS } from '../actions/Crew';
+import { STATUSES } from '../common/constants';
 
 const localStorageValue = localStorage.getItem('savedState');
 const initialState = localStorageValue ? JSON.parse(localStorageValue) : { crew: [], filteredCrew: [], filters: {  name: '', city: '' } };
 
-const CrewState = (state, action) => {
+if (initialState.filteredCrew.length) {
+    initialState.filteredCrew = filterPersons(initialState.crew, initialState.filters);
+}
+
+function filterPersons(list: Person[], filters: PersonFilters) {
+    return list.filter((person) => {
+        if (filters.name) {
+            return `${person.name.first} ${person.name.last}`.search(filters.name) !== -1;
+        }
+        if (filters.city) {
+            return person.location.city.search(filters.city) !== -1;
+        }
+        return true;
+    });
+}
+
+const CrewState = (state: Object, action: Action) => {
     if (typeof state === 'undefined') {
         return initialState;
     }
@@ -33,15 +49,7 @@ const CrewState = (state, action) => {
         }
 
         case SET_FILTERS: {
-            const filteredCrew = state.crew.filter((person) => {
-                if (action.filters.name) {
-                    return `${person.name.first} ${person.name.last}`.search(action.filters.name) !== -1;
-                }
-                if (action.filters.city) {
-                    return person.city.search(action.filters.city) !== -1;
-                }
-                return true;
-            });
+            const filteredCrew = filterPersons(state.crew, action.filters);
             const newState = Object.assign({}, state, { filteredCrew, filters: action.filters});
             localStorage.setItem('savedState', JSON.stringify(newState));
             return newState;

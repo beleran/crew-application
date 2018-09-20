@@ -7,14 +7,18 @@ import thunk from 'redux-thunk';
 import './index.scss';
 import App from './App';
 import rootReducer from './reducers';
-import registerServiceWorker from './registerServiceWorker';
 
-const store = createStore(rootReducer, applyMiddleware(thunk));
-
-ReactDOM.render(
-    <Provider store={store}>
-        <App />
-    </Provider>,
-    document.getElementById('root')
+const store = createStore(
+    rootReducer,
+    applyMiddleware(thunk),
 );
-registerServiceWorker();
+const container = document.getElementById('root');
+
+if (container) {
+    ReactDOM.render(
+        <Provider store={store}>
+            <App/>
+        </Provider>,
+        container
+    );
+}

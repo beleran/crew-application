@@ -1,12 +1,17 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import './App.scss';
 import CardsTable from './components/CardsTable';
 import Filters from './components/Filters';
 import Loading from './components/Loading';
 import { fetchCrew, setStatus } from "./actions/Crew";
+import styled from 'styled-components';
 
-class App extends Component {
+const AppWrapper = styled.div`
+    text-align: center;
+    height: 100%;
+`;
+
+class App extends Component<{ crew: Person[], filteredCrew: Person[], fetchCrew: Function, setStatus: Function }> {
     componentDidMount() {
         const { crew } = this.props;
         if (!crew || !crew.length) {
@@ -16,20 +21,20 @@ class App extends Component {
     render() {
         const { crew, filteredCrew } = this.props;
         return (
-            <div className="App">
+            <AppWrapper>
                 <Filters />
                 { crew && crew.length ? <CardsTable crew={filteredCrew} onStatusChange={this.props.setStatus} /> : <Loading /> }
-            </div>
+            </AppWrapper>
         );
     }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state: Object) => ({
     crew: state.CrewState.crew,
     filteredCrew: state.CrewState.filteredCrew,
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch: Function) => ({
     fetchCrew: () => dispatch(fetchCrew()),
     setStatus: (person, direction) => dispatch(setStatus(person, direction)),
 });

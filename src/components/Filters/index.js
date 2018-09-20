@@ -2,43 +2,60 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { setFilters } from "../../actions/Crew";
 
-import './styles.scss';
+import { FiltersWrapper, GroupWrapper } from './styled';
 
-class Filters extends Component {
-    constructor() {
-        super();
-        this.name = null;
-        this.city = null;
-    }
+class Filters extends Component<{ filters: PersonFilters, setFilters: Function }> {
+    name: HTMLInputElement;
+    city: HTMLInputElement;
+
     setFilters(e) {
+        this.props.setFilters({ name: this.name.value, city: this.city.value });
         if (e) {
             e.preventDefault();
+            e.stopPropagation();
         }
-        this.props.setFilters({ name: this.name.value, city: this.city.value });
     }
-    resetFilters() {
+    resetFilters(e) {
         this.props.setFilters({ name: '', city: '' });
+        if (e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
     }
     render() {
         const { filters } = this.props;
         return (
             <form onSubmit={(e) => this.setFilters(e)}>
-                <div className="ca-filters">
-                    <div>Name: <input type="text" ref={(ref) => { this.name = ref; }} defaultValue={filters.name}  /></div>
-                    <div>City: <input type="text" ref={(ref) => { this.city = ref; }} defaultValue={filters.city} /></div>
-                    <div><button type="submit" onClick={() => this.setFilters()}>Filter</button></div>
-                    <div><button onClick={() => this.resetFilters()}>Reset</button></div>
-                </div>
+                <FiltersWrapper>
+                    <GroupWrapper>
+                        Name:&nbsp;
+                        <input
+                            type="text"
+                            ref={(ref: HTMLInputElement | null) => { ref && (this.name = ref); }}
+                            defaultValue={filters.name}
+                        />
+                    </GroupWrapper>
+                    <GroupWrapper>
+                        City:&nbsp;
+                        <input
+                            type="text"
+                            ref={(ref: HTMLInputElement | null) => { ref && (this.city = ref); }}
+                            defaultValue={filters.city}
+                        />
+                    </GroupWrapper>
+                    <GroupWrapper><button type="submit" onClick={(e) => this.setFilters(e)}>Filter</button></GroupWrapper>
+                    <GroupWrapper><button onClick={(e) => this.resetFilters(e)}>Reset</button></GroupWrapper>
+                </FiltersWrapper>
             </form>
         )
     }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state: Object) => ({
     filters: state.CrewState.filters,
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch: Function) => ({
     setFilters: (filters) => dispatch(setFilters(filters)),
 });
 

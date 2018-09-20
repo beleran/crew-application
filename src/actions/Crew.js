@@ -5,7 +5,7 @@ export const SET_STATUS = 'SET_STATUS';
 export const SET_FILTERS = 'SET_FILTERS';
 
 export function fetchCrew() {
-    return (dispatch) => {
+    return (dispatch: Function) => {
         fetch('https://randomuser.me/api/?nat=gb&results=5')
             .then(resource => resource.json())
             .then(response => {
@@ -14,14 +14,5 @@ export function fetchCrew() {
     }
 }
 
-export function setStatus(person, direction) {
-    return (dispatch) => {
-        dispatch({ type: SET_STATUS, person, direction })
-    }
-}
-
-export function setFilters(filters) {
-    return (dispatch) => {
-        dispatch({ type: SET_FILTERS, filters })
-    }
-}
+export const setStatus = (person: Person, direction: number) => ({ type: SET_STATUS, person, direction });
+export const setFilters = (filters: PersonFilters): Object => ({ type: SET_FILTERS, filters });

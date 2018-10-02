@@ -1415,7 +1415,7 @@ declare module 'eslint/lib/code-path-analysis/code-path-segment.js' {
   declare module.exports: $Exports<'eslint/lib/code-path-analysis/code-path-segment'>;
 }
 declare module 'eslint/lib/code-path-analysis/code-path-state.js' {
-  declare module.exports: $Exports<'eslint/lib/code-path-analysis/code-path-state'>;
+  declare module.exports: $Exports<'eslint/lib/code-path-analysis/code-path-resolvers'>;
 }
 declare module 'eslint/lib/code-path-analysis/code-path.js' {
   declare module.exports: $Exports<'eslint/lib/code-path-analysis/code-path'>;

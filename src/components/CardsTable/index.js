@@ -1,30 +1,55 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import Card from '../Card';
-import { STATUSES } from "../../common/constants";
+import {Query} from 'react-apollo';
+import gql from 'graphql-tag';
+import {STATUSES} from "../../common/constants";
 
-import { Table, Column, Title, Content } from './styled';
+import {Table, Column, Title, Content} from './styled';
 
-class CardsTable extends Component<{ crew: Person[], onStatusChange: Function }> {
-    renderColumn(status: string) {
-        const { crew, onStatusChange } = this.props;
+const GET_CREW = gql`
+  query {
+      allUsers(count:10){
+        email
+        lastName
+        firstName
+        id
+        avatar
+      }
+  }
+`;
+
+
+class CardsTable extends Component<> {
+    renderColumn(status: string, data) {
         return (
-            <Column key={status}>
+
+            <Column key={status ? status : 0}>
                 <Title>{status}</Title>
                 <Content>
-                    { crew.filter(person => person.status === status).map(person => (
-                        <Card person={person} onStatusChange={onStatusChange} key={person.login.uuid} />
-                    )) }
+                    {data.allUsers.filter(person => person.status === status).map((person, index) => (
+                        <Card person={person}  key={person.id}/>
+                    ))}
                 </Content>
             </Column>
         )
     }
+
+
     render() {
-        return (
-            <Table>
-                { STATUSES.map(status => this.renderColumn(status))}
-            </Table>
-        );
+        return (<Query
+            query={GET_CREW}
+        >
+            {({loading, error, data}) => {
+                if (loading) return <p>Loading...</p>;
+                if (error) return <p>Error :(</p>;
+                this.data = data;
+                return (<Table>
+                    {STATUSES.map(status => this.renderColumn(status, data))}
+                </Table>);
+            }}
+        </Query>)
     }
 }
+
 
 export default CardsTable;

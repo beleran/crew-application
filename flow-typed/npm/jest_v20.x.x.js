@@ -27,7 +27,7 @@ type JestMockFn<TArguments: $ReadOnlyArray<*>, TReturn> = {
   mockClear(): void,
   /**
    * Resets all information stored in the mock. This is useful when you want to
-   * completely restore a mock back to its initial state.
+   * completely restore a mock back to its initial resolvers.
    */
   mockReset(): void,
   /**
@@ -315,7 +315,7 @@ type JestObjectType = {
    */
   clearAllMocks(): JestObjectType,
   /**
-   * Resets the state of all mocks. Equivalent to calling .mockReset() on every
+   * Resets the resolvers of all mocks. Equivalent to calling .mockReset() on every
    * mocked function.
    */
   resetAllMocks(): JestObjectType,
@@ -365,7 +365,7 @@ type JestObjectType = {
   ): JestObjectType,
   /**
    * Resets the module registry - the cache of all required modules. This is
-   * useful to isolate modules where local state might conflict between tests.
+   * useful to isolate modules where local resolvers might conflict between tests.
    */
   resetModules(): JestObjectType,
   /**

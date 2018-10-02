@@ -436,13 +436,13 @@ declare module 'eslint-plugin-react/lib/rules/no-deprecated.js' {
   declare module.exports: $Exports<'eslint-plugin-react/lib/rules/no-deprecated'>;
 }
 declare module 'eslint-plugin-react/lib/rules/no-did-mount-set-state.js' {
-  declare module.exports: $Exports<'eslint-plugin-react/lib/rules/no-did-mount-set-state'>;
+  declare module.exports: $Exports<'eslint-plugin-react/lib/rules/no-did-mount-set-resolvers'>;
 }
 declare module 'eslint-plugin-react/lib/rules/no-did-update-set-state.js' {
-  declare module.exports: $Exports<'eslint-plugin-react/lib/rules/no-did-update-set-state'>;
+  declare module.exports: $Exports<'eslint-plugin-react/lib/rules/no-did-update-set-resolvers'>;
 }
 declare module 'eslint-plugin-react/lib/rules/no-direct-mutation-state.js' {
-  declare module.exports: $Exports<'eslint-plugin-react/lib/rules/no-direct-mutation-state'>;
+  declare module.exports: $Exports<'eslint-plugin-react/lib/rules/no-direct-mutation-resolvers'>;
 }
 declare module 'eslint-plugin-react/lib/rules/no-find-dom-node.js' {
   declare module.exports: $Exports<'eslint-plugin-react/lib/rules/no-find-dom-node'>;
@@ -460,7 +460,7 @@ declare module 'eslint-plugin-react/lib/rules/no-render-return-value.js' {
   declare module.exports: $Exports<'eslint-plugin-react/lib/rules/no-render-return-value'>;
 }
 declare module 'eslint-plugin-react/lib/rules/no-set-state.js' {
-  declare module.exports: $Exports<'eslint-plugin-react/lib/rules/no-set-state'>;
+  declare module.exports: $Exports<'eslint-plugin-react/lib/rules/no-set-resolvers'>;
 }
 declare module 'eslint-plugin-react/lib/rules/no-string-refs.js' {
   declare module.exports: $Exports<'eslint-plugin-react/lib/rules/no-string-refs'>;
@@ -478,10 +478,10 @@ declare module 'eslint-plugin-react/lib/rules/no-unused-prop-types.js' {
   declare module.exports: $Exports<'eslint-plugin-react/lib/rules/no-unused-prop-types'>;
 }
 declare module 'eslint-plugin-react/lib/rules/no-unused-state.js' {
-  declare module.exports: $Exports<'eslint-plugin-react/lib/rules/no-unused-state'>;
+  declare module.exports: $Exports<'eslint-plugin-react/lib/rules/no-unused-resolvers'>;
 }
 declare module 'eslint-plugin-react/lib/rules/no-will-update-set-state.js' {
-  declare module.exports: $Exports<'eslint-plugin-react/lib/rules/no-will-update-set-state'>;
+  declare module.exports: $Exports<'eslint-plugin-react/lib/rules/no-will-update-set-resolvers'>;
 }
 declare module 'eslint-plugin-react/lib/rules/prefer-es6-class.js' {
   declare module.exports: $Exports<'eslint-plugin-react/lib/rules/prefer-es6-class'>;

@@ -35,7 +35,7 @@ declare module "react-redux" {
   DP = DispatchProps
   MP = Merge props
   MDP = Map dispatch to props object
-  RSP = Returned state props
+  RSP = Returned resolvers props
   RDP = Returned dispatch props
   RMP = Returned merge props
   CP = Props for returned component
